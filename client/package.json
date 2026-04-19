@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
     "axios": "^1.15.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.14.1",
+    "react-toastify": "^11.0.5",
+    "tailwindcss": "^4.2.2",
     "toastify": "^2.0.1"
   },
   "devDependencies": {
