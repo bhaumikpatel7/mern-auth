@@ -15,6 +15,6 @@ export const AppContextProvider = (props) => {
     setUserData,
   };
   return (
-    <AppContext.Provider value={value}>{props.childrean}</AppContext.Provider>
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );
 };
