@@ -8,15 +8,16 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { backendUrl, setIsLoggedin } = useContext(AppContext);
+  const { backendUrl, setIsLoggedin ,getUserData} = useContext(AppContext);
   const [state, setState] = useState("Sign Up");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
     try {
-      e.preventDefault();
       axios.defaults.withCredentials = true;
       if (state === "Sign Up") {
         const { data } = await axios.post(backendUrl + "/api/auth/register", {
@@ -27,6 +28,7 @@ const Login = () => {
 
         if (data.success) {
           setIsLoggedin(true);
+          getUserData();
           navigate("/");
         } else {
           toast.error(data.message);
@@ -39,13 +41,14 @@ const Login = () => {
 
         if (data.success) {
           setIsLoggedin(true);
+          getUserData();
           navigate("/");
         } else {
           toast.error(data.message);
         }
       }
     } catch (error) {
-      console.log(error.message)
+      toast.error(error.message);
     }
   };
 
@@ -111,7 +114,10 @@ const Login = () => {
             Forgot Password?
           </p>
 
-          <button className="w-full py-2.5 rounded-full bg-linear-to-r from-indigo-500 text-white font-medium">
+          <button
+            type="submit"
+            className="w-full py-2.5 rounded-full bg-linear-to-r cursor-pointer from-indigo-500 to-indigo-700 text-white font-medium"
+          >
             {state}
           </button>
         </form>

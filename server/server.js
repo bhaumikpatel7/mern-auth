@@ -14,9 +14,28 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 connectDB();
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:5174',
+    'http://localhost:4000'
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+            return;
+        }
+
+        callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
+    credentials: true
+};
 
 app.use(express.json());
-app.use(cors({credentials:true})); 
+app.use(cors(corsOptions)); 
 app.use(cookieParser());
 
 app.get('/',(req,res)=>{

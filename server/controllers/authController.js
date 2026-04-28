@@ -35,8 +35,8 @@ export const register = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "prodcution",
-      sameSite: process.env.NODE_ENV === " prodcution" ? "none" : "strict",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     //sending welcome email
@@ -49,7 +49,7 @@ export const register = async (req, res) => {
 
     await transport.sendMail(mailOptions).then(console.log, console.error);
 
-    return res.json({ sucess: true });
+    return res.json({ success: true });
   } catch (error) {
     return res.json({
       success: false,
@@ -93,12 +93,12 @@ export const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "prodcution",
-      sameSite: process.env.NODE_ENV === " prodcution" ? "none" : "strict",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res.json({ sucess: true });
+    return res.json({ success: true });
   } catch (error) {
     return res.json({
       success: false,
@@ -109,10 +109,10 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("taken", {
+    res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "prodcution",
-      sameSite: process.env.NODE_ENV === " prodcution" ? "none" : "strict",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -158,7 +158,7 @@ export const sendVerifyOtp = async (req, res) => {
     await transport.sendMail(mailOptions).then(console.log, console.error);
 
     res.json({
-      sucess: true,
+      success: true,
       message: "otp send ",
     });
   } catch (error) {

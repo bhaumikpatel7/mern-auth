@@ -5,7 +5,7 @@ const userAuth = async (req, res, next) => {
 
   if (!token) {
     return res.json({
-      sucess: false,
+      success: false,
       message: "Not Authorize to Login Again",
     });
   }
@@ -20,7 +20,7 @@ const userAuth = async (req, res, next) => {
 
     } else {
       return res.json({
-        sucess: false,
+        success: false,
         message: "Not Authorize to Login 2 Again",
       });
     }
@@ -28,7 +28,7 @@ const userAuth = async (req, res, next) => {
     next();
   } catch (error) {
     return res.json({
-      sucess: false,
+      success: false,
       message: error.message,
     });
   }

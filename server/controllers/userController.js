@@ -8,12 +8,12 @@ export const getUserData = async(req,res)=>{
         //check if user exists
         if(!user){
             return res.json({
-            sucess:false,
+            success:false,
             message:"user not found",
         })}
 
        return res.json({
-            sucess:true,
+            success:true,
             userData:{
                 name:user.name,
                 isVerified:user.isVerified
@@ -22,7 +22,7 @@ export const getUserData = async(req,res)=>{
         
     } catch (error) {
         return res.json({
-            sucess:false,
+            success:false,
             message:error.message
         })
     }
